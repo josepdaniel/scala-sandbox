@@ -1,5 +1,5 @@
-import cats._
-import cats.implicits._
+import cats.*
+import cats.implicits.*
 
 // Applicative provides a `pure` method to lift a value into the type-constructor
 val listWith3: List[Int] = Applicative[List].pure(3)

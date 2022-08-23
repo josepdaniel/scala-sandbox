@@ -1,7 +1,7 @@
-import cats._
-import cats.kernel._
-import cats.data._
-import cats.implicits._
+import cats.*
+import cats.kernel.*
+import cats.data.*
+import cats.implicits.*
 
 // The Writer[A, B] allows you to carry around an additional type A that can be used to store (for example) logs
 val val10: Writer[Vector[String], Int] =
