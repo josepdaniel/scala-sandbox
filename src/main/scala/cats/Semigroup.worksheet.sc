@@ -5,7 +5,7 @@ val x = Semigroup[List[Int]].combine(List(1), List(2))
 // x: List[Int] = List(1, 2)
 
 // It's useful for when we don't know ahead of time what we are combining
-def combineStuff[F[A], A](x: F[A], y: F[A])(implicit
+def combineStuff[F[A], A](x: F[A], y: F[A])(using
     s: Semigroup[F[A]]
 ): F[A] = {
   Semigroup[F[A]].combine(x, y)

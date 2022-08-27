@@ -34,6 +34,8 @@ val result = for {
 result.unsafeRunSync()
 
 // So that didn't work. We should use a Dispatcher to perform the nasty side-effect
+// The dispatcher will dispatch the effectful stuff to the existing scheduler that comes
+// with an IOApp, so it's much cheaper that instantiating your own scheduler with an IO.unsafeRun*
 val result2 = Dispatcher[IO].use { d =>
   for {
     queue <- Queue.unbounded[IO, String]
