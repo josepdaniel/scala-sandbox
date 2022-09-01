@@ -56,3 +56,17 @@ val result2 = Dispatcher[IO].use { d =>
 
 // This unsafeRunSync is for demo purposes only. Should not be used in real life.
 result2.unsafeRunSync()
+
+// Be careful not to leak a dispatcher. Dispatcher.apply returns a Resource[F, Dispatcher].
+// After the '.use' exits, the dispatcher is destroyed. If it is leaked, any attempts
+// to submit an effect with a dispatcher throws an exception
+val leaky = Dispatcher[IO].use { d =>
+  for {
+    something <- IO(3)
+  } yield d
+}
+
+// leaky
+//   .map(dispatcher => dispatcher.unsafeRunSync(IO.println("Hello world")))
+//   .unsafeRunSync()
+// Java exception
